@@ -18,9 +18,11 @@ export default function EditInvoiceForm({
   invoice: InvoiceForm;
   customers: CustomerField[];
 }) {
+  const initialState = { message: null, errors: {} };
   const updateInvoiceWithId = updateInvoice.bind(null, invoice.id);
+  const [state, dispatch] = useFormState(updateInvoiceWithId, initialState);
   return (
-    <form action={updateInvoiceWithId}>
+    <form  action={dispatch}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Customer Name */}
         <div className="mb-4">
@@ -123,3 +125,7 @@ export default function EditInvoiceForm({
     </form>
   );
 }
+function useFormState(updateInvoiceWithId: (prevState: import("@/app/lib/actions").State, formData: FormData) => Promise<{ errors: { status?: string[] | undefined; customerId?: string[] | undefined; amount?: string[] | undefined; }; message: string; } | { message: string; errors?: undefined; }>, initialState: { message: null; errors: {}; }): [any, any] {
+  throw new Error('Function not implemented.');
+}
+
